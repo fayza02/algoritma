@@ -1,0 +1,117 @@
+#toko kue sule
+import os
+import time
+
+kue_keju = 6000
+kue_coklat = 3500
+stock_kue = [25,35]
+x=1
+
+def home() :
+    print("-"*30)
+    print("\tToko Kue Sule")
+    print("-"*30)
+    print("1. Menu")
+    print("2. Stock")
+    print("3. Keluar")
+
+def menu() :
+    print("------------------------------DESSERT TIME--------------------------------------")
+    print("1. | Kue keju   | Rp. 6000 | 5 - 12 porsi Diskon 7%  | 21 - 35 porsi Diskon 12% |")
+    print("2. | Kue coklat | Rp. 3500 | 4 - 15 porsi Diskon 10% | 16 - 25 porsi Diskon 15% |")
+    print("------------------------------DESSERT TIME--------------------------------------")
+    porsi_keju = int(input("Berapa porsi kue keju? "))
+    if porsi_keju > stock_kue[0] :
+        print("Maaf stok kue keju yang tersedia tidak mencukupi")
+
+    porsi_coklat = int(input("Berapa porsi kue coklat? "))
+    if porsi_coklat > stock_kue[1] :
+        print("Maaf stok kue coklat yang tersedia tidak mencukupi")
+    
+    jumlah_keju = kue_keju * porsi_keju
+    if porsi_keju >= 4 and porsi_keju <= 15 :
+        promo = 10 / 100 * jumlah_keju
+        total_keju = jumlah_keju - promo
+        print("Kue Keju\nHarga : Rp",kue_keju,'*',porsi_keju,'=',jumlah_keju)
+        print("Promo Kue Keju : ",promo)
+    elif porsi_keju >= 16 and porsi_keju <= 25 :
+        promo = 15 / 100 * jumlah_keju
+        total = jumlah_keju - promo
+        print("Kue Keju\nHarga :",kue_keju,'*',porsi_keju,'=',jumlah_keju)
+        print("Promo Kue Keju : ",promo)
+    elif porsi_keju >= 1 and porsi_keju <= 3 :
+        total_keju = jumlah_keju
+        print("Kue Keju\nHarga : Rp ",total_keju)  
+    else :
+        print("Input salah silahkan pesan kembali")
+        menu()
+
+    jumlah_coklat = 3500 * porsi_coklat
+    if porsi_coklat >= 1 and porsi_coklat <= 4 :
+        total_coklat = jumlah_coklat
+        print("Kue coklat\nHarga : Rp",total_coklat)
+    elif porsi_coklat >= 5 and porsi_coklat <= 20 :
+        promo = 7 / 100 * jumlah_coklat
+        total_coklat = jumlah_coklat - promo
+        print("Kue Coklat\nHarga : Rp",kue_coklat,'*',porsi_coklat,'=',jumlah_coklat)
+        print("Promo Kue Coklat : ",promo)
+    elif porsi_coklat >= 21 and porsi_coklat <= 35 :
+        promo = 12 / 100 * jumlah_coklat
+        total_coklat = jumlah_coklat - promo
+        print("Kue Coklat\nHarga : Rp",kue_coklat,'*',porsi_coklat,'=',jumlah_coklat)
+        print("Promo Kue Coklat : ",promo)
+    else :
+        print("Input salah silahkan pesan kembali")
+        menu()
+    
+    stock_kue[0] -= porsi_keju
+    stock_kue[1] -= porsi_coklat
+    total_harga_kue = total_keju + total_coklat
+    print("Total : Rp.",total_harga_kue)
+    bayar = float(input("bayar : "))
+    kembalian = bayar - total_harga_kue
+    if bayar >= total_harga_kue :
+        print("kembalian : Rp.",kembalian)
+    else :
+        print("Bayar sesuai yang anda beli ")
+
+def stock():
+    print("--------Stock Kue Sule--------")
+    print("Stock Kue Keju : ",stock_kue[0])
+    print("Stock Kue coklat : ",stock_kue[1])
+    print("--------Stock Kue Sule--------")
+
+    stock_kue_keju = int(input("Masukkan jumlah stock kue keju : "))
+    stock_kue[0] += stock_kue_keju
+    if stock_kue_keju + stock_kue[0] > 25 :
+        print("stok kue keju hanya 25")
+    else :
+        print("stok kue keju : ",stock_kue[0])
+
+    stock_kue_coklat = int(input("Masukkan jumlah stock kue coklat : "))
+    stock_kue[1] += stock_kue_coklat
+    if stock_kue_coklat + stock_kue[1] > 35 :
+        print("stok kue coklat hanya 35")
+    else :
+        print("stok kue coklat : ",stock_kue[1])
+
+def keluar() :
+    x == 0
+    print("-"*30)
+    print("\tTerimakasih")
+    print("-"*30)
+    time.sleep(2)
+    exit()
+
+while x == 1 :
+    home()
+    selected_home = str(input("masukkan angka :"))
+    if selected_home == "1" :
+        menu()
+    elif selected_home == "2" :
+        stock()
+    elif selected_home == "3" :
+        keluar()
+    else :
+        print("masukkan angka yang sesuai")
+        
